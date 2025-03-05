@@ -45,5 +45,5 @@ jobs:
       - name: "Run benchmarks"
         uses: CodSpeedHQ/action@v3
         with:
-          run: cargo codspeed run
+          run: CODSPEED_LOG=debug codspeed run --skip-upload cargo codspeed run
           token: ${{ secrets.CODSPEED_TOKEN }}
