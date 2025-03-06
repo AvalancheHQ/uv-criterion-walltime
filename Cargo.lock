@@ -648,7 +648,7 @@ checksum = "f46ad14479a25103f283c0f10005961cf086d8dc42205bb44c46ac563475dca6"
 [[package]]
 name = "codspeed"
 version = "2.8.1"
-source = "git+https://github.com/CodspeedHQ/codspeed-rust?branch=cod-240-walltime-criterion-support#c4b921d469d9f5e33bd0824104b2c9f91917b226"
+source = "git+https://github.com/CodspeedHQ/codspeed-rust?branch=cod-240-walltime-criterion-support#1d230289a81f5f2c927a6c173ab4ed3c1083493b"
 dependencies = [
  "colored",
  "libc",
@@ -660,7 +660,7 @@ dependencies = [
 [[package]]
 name = "codspeed-criterion-compat"
 version = "2.8.1"
-source = "git+https://github.com/CodspeedHQ/codspeed-rust?branch=cod-240-walltime-criterion-support#c4b921d469d9f5e33bd0824104b2c9f91917b226"
+source = "git+https://github.com/CodspeedHQ/codspeed-rust?branch=cod-240-walltime-criterion-support#1d230289a81f5f2c927a6c173ab4ed3c1083493b"
 dependencies = [
  "codspeed",
  "codspeed-criterion-compat-walltime",
@@ -670,7 +670,7 @@ dependencies = [
 [[package]]
 name = "codspeed-criterion-compat-walltime"
 version = "0.5.1"
-source = "git+https://github.com/CodspeedHQ/codspeed-rust?branch=cod-240-walltime-criterion-support#c4b921d469d9f5e33bd0824104b2c9f91917b226"
+source = "git+https://github.com/CodspeedHQ/codspeed-rust?branch=cod-240-walltime-criterion-support#1d230289a81f5f2c927a6c173ab4ed3c1083493b"
 dependencies = [
  "anes",
  "cast",
