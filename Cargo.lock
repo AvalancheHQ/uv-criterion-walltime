@@ -648,8 +648,7 @@ checksum = "f46ad14479a25103f283c0f10005961cf086d8dc42205bb44c46ac563475dca6"
 [[package]]
 name = "codspeed"
 version = "2.8.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "de4b67ff8985f3993f06167d71cf4aec178b0a1580f91a987170c59d60021103"
+source = "git+https://github.com/CodspeedHQ/codspeed-rust?branch=cod-240-walltime-criterion-support#b8a1485cff77699a8335958245abc7577f68f391"
 dependencies = [
  "colored",
  "libc",
@@ -661,12 +660,35 @@ dependencies = [
 [[package]]
 name = "codspeed-criterion-compat"
 version = "2.8.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "68403d768ed1def18a87e2306676781314448393ecf0d3057c4527cabf524a3d"
+source = "git+https://github.com/CodspeedHQ/codspeed-rust?branch=cod-240-walltime-criterion-support#b8a1485cff77699a8335958245abc7577f68f391"
 dependencies = [
  "codspeed",
+ "codspeed-criterion-compat-walltime",
  "colored",
- "criterion",
+]
+
+[[package]]
+name = "codspeed-criterion-compat-walltime"
+version = "0.5.1"
+source = "git+https://github.com/CodspeedHQ/codspeed-rust?branch=cod-240-walltime-criterion-support#b8a1485cff77699a8335958245abc7577f68f391"
+dependencies = [
+ "anes",
+ "cast",
+ "ciborium",
+ "clap",
+ "codspeed",
+ "criterion-plot",
+ "is-terminal",
+ "itertools 0.10.5",
+ "num-traits",
+ "once_cell",
+ "oorandom",
+ "regex",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "tinytemplate",
+ "walkdir",
 ]
 
 [[package]]
@@ -4615,6 +4637,7 @@ name = "uv-bench"
 version = "0.0.0"
 dependencies = [
  "anyhow",
+ "codspeed",
  "codspeed-criterion-compat",
  "criterion",
  "jiff",
