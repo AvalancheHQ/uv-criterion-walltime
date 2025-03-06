@@ -17,6 +17,8 @@ jobs:
   benchmarks-walltime:
     runs-on: codspeed-macro
     timeout-minutes: 20
+    env:
+      CODSPEED_LOG: debug
     steps:
       - name: "Checkout Branch"
         uses: actions/checkout@v4
@@ -45,5 +47,5 @@ jobs:
       - name: "Run benchmarks"
         uses: CodSpeedHQ/action@v3
         with:
-          run: CODSPEED_LOG=debug codspeed run --skip-upload cargo codspeed run
+          run: cargo codspeed run
           token: ${{ secrets.CODSPEED_TOKEN }}
