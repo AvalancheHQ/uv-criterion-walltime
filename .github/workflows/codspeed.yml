@@ -19,6 +19,7 @@ jobs:
     timeout-minutes: 20
     env:
       CODSPEED_LOG: debug
+      CARGO_NET_GIT_FETCH_WITH_CLI: true
     steps:
       - name: "Checkout Branch"
         uses: actions/checkout@v4
