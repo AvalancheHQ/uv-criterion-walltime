@@ -47,7 +47,7 @@ uv-resolver = { workspace = true }
 uv-types = { workspace = true }
 
 anyhow = { workspace = true }
-codspeed-criterion-compat = { version = "2.7.2", default-features = false, optional = true, git = "https://github.com/CodspeedHQ/codspeed-rust", branch = "cod-240-walltime-criterion-support" }
+codspeed-criterion-compat = { version = "2.9.1", default-features = false, optional = true }
 
 criterion = { version = "0.5.1", default-features = false, features = [
   "async_tokio",
