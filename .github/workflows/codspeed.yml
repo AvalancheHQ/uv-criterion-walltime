@@ -19,6 +19,7 @@ jobs:
     timeout-minutes: 20
     env:
       CODSPEED_LOG: debug
+      USE_PERF: true
       CARGO_NET_GIT_FETCH_WITH_CLI: true
     steps:
       - name: "Checkout Branch"
@@ -47,6 +48,11 @@ jobs:
 
       - name: "Run benchmarks"
         uses: CodSpeedHQ/action@v3
+        env:
+          CODSPEED_LOG: debug
+          USE_PERF: true
         with:
           run: cargo codspeed run
           token: ${{ secrets.CODSPEED_TOKEN }}
+          runner-version: 3.6.0-beta.2
+          upload-url: https://api.staging.preview.codspeed.io/upload
