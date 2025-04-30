@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 20
     env:
       CODSPEED_LOG: debug
-      USE_PERF: true
+      USE_PERF: 1
       CARGO_NET_GIT_FETCH_WITH_CLI: true
     steps:
       - name: "Checkout Branch"
@@ -50,7 +50,7 @@ jobs:
         uses: CodSpeedHQ/action@v3
         env:
           CODSPEED_LOG: debug
-          USE_PERF: true
+          USE_PERF: 1
         with:
           run: cargo codspeed run
           token: ${{ secrets.CODSPEED_TOKEN }}
