@@ -21,6 +21,7 @@ jobs:
     env:
       CODSPEED_LOG: debug
       USE_PERF: 1
+      CODSPEED_RUNNER_MODE: "walltime"
       CARGO_NET_GIT_FETCH_WITH_CLI: true
     steps:
       - name: "Checkout Branch"
@@ -44,14 +45,14 @@ jobs:
           cargo run --bin uv -- pip compile scripts/requirements/jupyter.in --universal --exclude-newer 2024-08-08 --cache-dir .cache
           cargo run --bin uv -- pip compile scripts/requirements/airflow.in --universal --exclude-newer 2024-08-08 --cache-dir .cache
 
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-
       - name: "Build benchmarks"
         run: cargo codspeed build --profile profiling --features "codspeed,performance" -p uv-bench
 
       - name: "Install perf"
         run: sudo apt-get install -y linux-tools-common linux-tools-generic linux-tools-$(uname -r)
+
+      # - name: Setup upterm session
+      #   uses: lhotari/action-upterm@v1
 
       - name: "Run benchmarks"
         uses: CodSpeedHQ/action@v3
