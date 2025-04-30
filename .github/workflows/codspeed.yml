@@ -43,6 +43,9 @@ jobs:
           cargo run --bin uv -- pip compile scripts/requirements/jupyter.in --universal --exclude-newer 2024-08-08 --cache-dir .cache
           cargo run --bin uv -- pip compile scripts/requirements/airflow.in --universal --exclude-newer 2024-08-08 --cache-dir .cache
 
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+
       - name: "Build benchmarks"
         run: cargo codspeed build --profile profiling --features "codspeed,performance" -p uv-bench
 
