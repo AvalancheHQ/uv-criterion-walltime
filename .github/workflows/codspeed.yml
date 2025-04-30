@@ -15,7 +15,8 @@ env:
 
 jobs:
   benchmarks-walltime:
-    runs-on: codspeed-macro
+    runs-on: ubuntu-latest
+    # runs-on: codspeed-macro
     timeout-minutes: 20
     env:
       CODSPEED_LOG: debug
