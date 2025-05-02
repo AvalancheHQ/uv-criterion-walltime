@@ -48,19 +48,19 @@ jobs:
       - name: "Build benchmarks"
         run: cargo codspeed build --profile profiling --features "codspeed,performance" -p uv-bench
 
-      - name: "Install perf"
-        run: sudo apt-get install -y linux-tools-common linux-tools-generic linux-tools-$(uname -r)
+      - name: "Install custom runner"
+        run: cargo install --git https://github.com/codspeedhq/runner --branch cod-674-collect-profiles-while-benchmarks-are-running
 
-      # - name: Setup upterm session
-      #   uses: lhotari/action-upterm@v1
+      - name: "Profile"
+        run: USE_PERF=1 CODSPEED_LOG=debug codspeed run cargo codspeed run
 
-      - name: "Run benchmarks"
-        uses: CodSpeedHQ/action@v3
-        env:
-          CODSPEED_LOG: debug
-          USE_PERF: 1
-        with:
-          run: cargo codspeed run
-          token: ${{ secrets.CODSPEED_TOKEN }}
-          runner-version: 3.6.0-beta.2
-          upload-url: https://api.staging.preview.codspeed.io/upload
+      # - name: "Run benchmarks"
+      #   uses: CodSpeedHQ/action@v3
+      #   env:
+      #     CODSPEED_LOG: debug
+      #     USE_PERF: 1
+      #   with:
+      #     run: cargo codspeed run
+      #     token: ${{ secrets.CODSPEED_TOKEN }}
+      #     runner-version: 3.6.0-beta.2
+      #     upload-url: https://api.staging.preview.codspeed.io/upload
