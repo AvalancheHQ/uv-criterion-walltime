@@ -48,10 +48,10 @@ jobs:
         run: cargo codspeed build --profile profiling --features "codspeed,performance" -p uv-bench
 
       - name: "Install custom runner"
-        run: cargo install --git https://github.com/codspeedhq/runner --branch cod-674-collect-profiles-while-benchmarks-are-running
+        run: cargo install --git https://github.com/codspeedhq/runner --branch main
 
       - name: "Profile"
-        run: USE_PERF=1 CODSPEED_LOG=debug codspeed run --api-url https://gql.staging.preview.codspeed.io/ --upload-url https://api.staging.preview.codspeed.io/upload cargo codspeed run
+        run: USE_PERF=1 CODSPEED_LOG=debug CODSPEED_TOKEN=${{ secrets.CODSPEED_TOKEN }} codspeed run --api-url https://gql.staging.preview.codspeed.io/ --upload-url https://api.staging.preview.codspeed.io/upload cargo codspeed run
 
       # - name: "Run benchmarks"
       #   uses: CodSpeedHQ/action@v3
