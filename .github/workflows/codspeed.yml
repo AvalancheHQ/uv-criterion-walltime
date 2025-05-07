@@ -51,7 +51,7 @@ jobs:
         run: cargo install --git https://github.com/codspeedhq/runner --branch cod-674-collect-profiles-while-benchmarks-are-running
 
       - name: "Profile"
-        run: USE_PERF=1 CODSPEED_LOG=debug codspeed --api-url https://gql.staging.preview.codspeed.io/ --upload-url https://api.staging.preview.codspeed.io/upload --frontend-url https://staging.codspeed.io/ run cargo codspeed run
+        run: USE_PERF=1 CODSPEED_LOG=debug codspeed run --api-url https://gql.staging.preview.codspeed.io/ --upload-url https://api.staging.preview.codspeed.io/upload cargo codspeed run
 
       # - name: "Run benchmarks"
       #   uses: CodSpeedHQ/action@v3
