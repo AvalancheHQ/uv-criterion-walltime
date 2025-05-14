@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 20
     env:
       CODSPEED_LOG: debug
-      USE_PERF: 1
+      CODSPEED_USE_PERF: 1
       CODSPEED_RUNNER_MODE: "walltime"
       CARGO_NET_GIT_FETCH_WITH_CLI: true
     steps:
@@ -47,19 +47,13 @@ jobs:
       - name: "Build benchmarks"
         run: cargo codspeed build --profile profiling --features "codspeed,performance" -p uv-bench
 
-      - name: "Install custom runner"
-        run: cargo install --git https://github.com/codspeedhq/runner --branch main
-
-      - name: "Profile"
-        run: USE_PERF=1 CODSPEED_LOG=debug CODSPEED_TOKEN=${{ secrets.CODSPEED_TOKEN }} codspeed run --api-url https://gql.staging.preview.codspeed.io/ --upload-url https://api.staging.preview.codspeed.io/upload cargo codspeed run
-
-      # - name: "Run benchmarks"
-      #   uses: CodSpeedHQ/action@v3
-      #   env:
-      #     CODSPEED_LOG: debug
-      #     USE_PERF: 1
-      #   with:
-      #     run: cargo codspeed run
-      #     token: ${{ secrets.CODSPEED_TOKEN }}
-      #     runner-version: 3.6.0-beta.2
-      #     upload-url: https://api.staging.preview.codspeed.io/upload
+      - name: "Run benchmarks"
+        uses: CodSpeedHQ/action@v3
+        env:
+          CODSPEED_LOG: debug
+          CODSPEED_USE_PERF: 1
+        with:
+          run: cargo codspeed run
+          token: ${{ secrets.CODSPEED_TOKEN }}
+          runner-version: 3.6.0-beta.3
+          upload-url: https://api.staging.preview.codspeed.io/upload
