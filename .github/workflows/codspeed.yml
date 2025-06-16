@@ -54,5 +54,5 @@ jobs:
           CODSPEED_USE_PERF: 1
         with:
           run: cargo codspeed run
-          runner-version: 3.6.1
+          runner-version: 3.6.0
           upload-url: https://ziymwhsich.execute-api.eu-west-1.amazonaws.com/upload
