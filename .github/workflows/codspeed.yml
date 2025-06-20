@@ -1,0 +1,59 @@
+name: codspeed
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  CARGO_INCREMENTAL: 0
+  CARGO_NET_RETRY: 10
+  CARGO_TERM_COLOR: always
+  RUSTUP_MAX_RETRIES: 10
+  PYTHON_VERSION: "3.12"
+
+jobs:
+  benchmarks-walltime:
+    runs-on: codspeed-macro-staging
+    timeout-minutes: 20
+    env:
+      CODSPEED_LOG: debug
+      CODSPEED_USE_PERF: 1
+      CODSPEED_RUNNER_MODE: "walltime"
+      CARGO_NET_GIT_FETCH_WITH_CLI: true
+    steps:
+      - name: "Checkout Branch"
+        uses: actions/checkout@v4
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: "Install Rust toolchain"
+        run: rustup show
+
+      - name: "Install codspeed"
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-codspeed
+
+      - name: "Install requirements and prime cache"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsasl2-dev libldap2-dev libkrb5-dev
+          cargo run --bin uv -- venv --cache-dir .cache
+          cargo run --bin uv -- pip compile scripts/requirements/jupyter.in --universal --exclude-newer 2024-08-08 --cache-dir .cache
+          cargo run --bin uv -- pip compile scripts/requirements/airflow.in --universal --exclude-newer 2024-08-08 --cache-dir .cache
+
+      - name: "Build benchmarks"
+        run: cargo codspeed build --profile profiling --features "codspeed,performance" -p uv-bench
+
+      - name: "Run benchmarks"
+        uses: CodSpeedHQ/action@v3
+        env:
+          CODSPEED_LOG: debug
+          CODSPEED_USE_PERF: 1
+        with:
+          run: cargo codspeed run
+          token: ${{ secrets.CODSPEED_TOKEN }}
+          runner-version: 3.6.0-beta.3
+          upload-url: https://api.staging.preview.codspeed.io/upload

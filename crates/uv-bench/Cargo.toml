@@ -47,7 +47,7 @@ uv-resolver = { workspace = true }
 uv-types = { workspace = true }
 
 anyhow = { workspace = true }
-codspeed-criterion-compat = { version = "2.7.2", default-features = false, optional = true }
+codspeed-criterion-compat = { default-features = false, optional = true, git = "https://github.com/CodspeedHQ/codspeed-rust", branch = "main" }
 criterion = { version = "0.5.1", default-features = false, features = ["async_tokio"] }
 jiff = { workspace = true }
 tokio = { workspace = true }
